@@ -25,7 +25,7 @@
 
     - Second method :
         -  Create a network for the MySQL and Tooling app container so they can connect:
-    `docker network create --subnet=172.18.0.0/24 tooling_app_network ` - where tooling_aap_network is the name of the network
+    `docker network create --subnet=172.18.0.0/24 tooling_app_network ` - where tooling_app_network is the name of the network
 
             ![image](./screenshots/docker_network_create.png)
 
@@ -59,7 +59,7 @@
 
    - Export the location of the sql script for the schema`export tooling_db_schema=~/tooling/html/tooling_db_schema.sql`
 
-        *Comments: docker did not find the SQL file as the tooling was saved inside another folder, so I changed the location of teh file `export tooling_db_schema=~/OneDrive/Documents/Devops_Workspace/project_21/tooling/html/tooling_db_schema.sql`*
+        *Comments: docker did not find the SQL file as the tooling was saved inside another folder, so I changed the location for the file `export tooling_db_schema=~/OneDrive/Documents/Devops_Workspace/project_21/tooling/html/tooling_db_schema.sql`*
             
 
     - Run the sql script inside MySQL server container - this will create the database and prepare the schema
@@ -67,12 +67,8 @@
 
     - Update `db_conn.php` with connection details to the database
     
-        ```
-        $servername = "mysqlserverhost";
-        $username = "<user>";
-        $password = "<client-secret-password>";
-        $dbname = "toolingdb";
-        ```
+        ![image](./screenshots/tooling-db-creds.png)
+
 ### Run Tooling App
 
 1. Build an image from the Dockerfile inside the Tooling repo with `docker build -t tooling:0.0.1 .` - make sure you are inside the Dockerfile root folder when you do this
@@ -117,7 +113,7 @@
             
 
     - Run the sql script inside MySQL server container - this will create the database and prepare the schema
-    `docker exec -i mysql-server mysql -uroot -p$MYSQL_PW < $tooling_db_schema`
+    `docker exec -i todo-mysql mysql -uroot -p$MYSQL_PW < $tooling_db_schema`
 
 4. Change the name of the `.env.sample` file to `.env`, and update the file with your database credentials - for DB_HOST use the name or port of the container running MySQL
 
@@ -155,7 +151,7 @@
 
 3. Create access token (go to security section under 'My account') - make sure to copy it 
 
-4. Login to DockerHub from you terminal used `docker login -u adaane` and use the access token you created as password
+4. Login to DockerHub from your terminal `docker login -u adaane` and use the access token you created as password
 
 5. Tag and push your image to the new repo
 
