@@ -1,25 +1,3 @@
-1. `docker images ls` didn't show anything so I used `docker images`
-
-    ![lsit_images](./screenshots/list_images_empty.png)
-
-2. running `docker exec -i mysql-server mysql -uroot -p$MYSQL_PW < ./create_user.sql` 
-
-    ![image](./screenshots/Screenshot%202024-02-22%20180016.png)
-
-    it doesnt give a confirmation that the user has been created successfully but I confirmed this by loggin into mysql and checking the list of users
-
-
-3. if I used `export tooling_db_schema=~/tooling/html/tooling_db_schema.sql` docker wouldnt find the file as I had is saved into a dedicated forlder for this project, the command was modified to
-
-    `export tooling_db_schema=~/OneDrive/Documents/Devops_Workspace/project_21/tooling/html/tooling_db_schema.sql`
-
-    4. This is the output after running the command below, I checked in Docker Desktop and a container was created with the tooling:0.01 image but it wouldn't start
-
-        ![container_exited](./screenshots/container_exited.png)
-
-        I think the issue was with the *start-apache* script which was not in teh format that bash can understand as discussed in this thread: https://stackoverflow.com/questions/29045140/env-bash-r-no-such-file-or-directory/29045187#29045187
-
-        I changed the script format using `dos2unix start-apache `
 
 <!-- ### DESIGNING A DOCKERFILE FOR THE TODO APP (not to include in documentation just for learning)
 
@@ -108,25 +86,7 @@ I encountered different issues with this task
 
 
 
-## TODO APP CONTAINERIZATION
 
-1. create a network so that the database and app can communicate
-2. create and .env file with your environmental variables (look at the database.php file inside config folder). for DB_HOST use the name or port of the container running MySQL 
-
-
-- encountered error while trying to access the todo app
-
-    ![errorpage](./screenshots/error.png)
-
-    this errror was due to not running the tooling schema in mysql and not configuring the .env to properly (verify with testing)
-
-## DOCKERHUB
-
-- after creating a new image repository I created an access token in DockerHub for login (go to security section under 'My account')
-- used `docker login -u adaane` to log into the Docker Hub from command line
-- used the token as password
-- tagged the todo-app image
--pushed the image
 
 #### for webhooksjenkins server
 

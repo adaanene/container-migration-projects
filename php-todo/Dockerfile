@@ -4,7 +4,6 @@ USER root
 
 WORKDIR /var/www/html
  
-
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     zlib1g-dev \
@@ -23,8 +22,6 @@ RUN apt-get update && apt-get install -y \
     && docker-php-source delete
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# RUN mv .env.sample .env
 
 RUN COMPOSER_ALLOW_SUPERUSER=1
 
